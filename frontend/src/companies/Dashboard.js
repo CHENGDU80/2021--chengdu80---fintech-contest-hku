@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import News from "./News";
 import LineChart from "./LineChart";
 import DoughnutChart from "./Doughnut";
-import TwoLinesChart from "./LineChart";
+import Crazy from "./Crazy";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "2rem" },
@@ -91,6 +91,20 @@ const Dashboard = () => {
                 />
               </Paper>
             </Grid>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Paper className={classes.div}>
+              <Crazy
+                type={["line", "bar"]}
+                labels={["1", "2", "3", "4", "5", "6"]}
+                label={["# of Votes", "# of sth"]}
+                data={[
+                  [12, 19, 3, 5, 2, 3],
+                  [5, 2, 8, 1, 12, 3],
+                ]}
+              />
+            </Paper>
           </Grid>
 
           <Grid item xs={8} md={4}>
