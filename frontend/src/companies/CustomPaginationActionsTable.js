@@ -14,6 +14,9 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
+import { useDispatch } from "react-redux";
+import { search } from "./companiesSlice";
+import { useHistory } from "react-router-dom";
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -101,6 +104,8 @@ export default function CustomPaginationActionsTable(props) {
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -112,6 +117,11 @@ export default function CustomPaginationActionsTable(props) {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const onMoreInfo = (dispatch, id, history) => {
+    dispatch(search({ id }));
+    history.push("/dashboard");
   };
 
   return (
@@ -130,11 +140,15 @@ export default function CustomPaginationActionsTable(props) {
               >
                 {row.name}
               </TableCell>
-              {/* <TableCell style={{ width: 160 }} align="right">
-                {row.calories}
-              </TableCell> */}
               <TableCell style={{ width: 160 }} align="right">
-                <Button className={classes.button}>More Info</Button>
+                <Button
+                  className={classes.button}
+                  onClick={() => {
+                    onMoreInfo(dispatch, row.id, history);
+                  }}
+                >
+                  More Info
+                </Button>
               </TableCell>
             </TableRow>
           ))}

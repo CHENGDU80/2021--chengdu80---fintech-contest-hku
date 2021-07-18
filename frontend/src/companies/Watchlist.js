@@ -2,10 +2,10 @@ import React from "react";
 import CustomPaginationActionsTable from "./CustomPaginationActionsTable";
 import { Paper, Typography, Box, Divider } from "@material-ui/core";
 import { selectUser } from "../users/usersSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-function createData(name, calories, fat) {
-  return { name, calories, fat };
+function createData(name, id, fat) {
+  return { name, id, fat };
 }
 
 const rows = [
