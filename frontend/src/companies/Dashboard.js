@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import News from "./News";
 import LineChart from "./LineChart";
 import DoughnutChart from "./Doughnut";
-import TwoLinesChart from "./TwoLinesChart";
+import TwoLinesChart from "./LineChart";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "2rem" },
@@ -36,6 +36,15 @@ const Dashboard = () => {
                 Add to watchlist
               </Button>
             </Grid>
+            <Grid item xs={5}>
+              <Button
+                variant="contained"
+                className={classes.button}
+                color="primary"
+              >
+                Risk Analysis
+              </Button>
+            </Grid>
           </Grid>
 
           <Grid item xs={12}>
@@ -52,12 +61,13 @@ const Dashboard = () => {
           >
             <Grid item xs={12}>
               <Paper className={classes.div}>
-                <TwoLinesChart
+                <LineChart
                   labels={["1", "2", "3", "4", "5", "6"]}
-                  label1={"# of Votes"}
-                  data1={[12, 19, 3, 5, 2, 3]}
-                  label2={"# of sth"}
-                  data2={[5, 2, 8, 1, 12, 3]}
+                  label={["# of Votes", "# of sth"]}
+                  data={[
+                    [12, 19, 3, 5, 2, 3],
+                    [5, 2, 8, 1, 12, 3],
+                  ]}
                 />
               </Paper>
             </Grid>
@@ -66,7 +76,7 @@ const Dashboard = () => {
               <Paper className={classes.div}>
                 <DoughnutChart
                   labels={["1", "2", "3"]}
-                  label={"# of Votes"}
+                  label={["# of Votes"]}
                   data={[12, 19, 3]}
                 />
               </Paper>
@@ -76,8 +86,8 @@ const Dashboard = () => {
               <Paper className={classes.div}>
                 <LineChart
                   labels={["1", "2", "3", "4", "5", "6"]}
-                  label={"# of Votes"}
-                  data={[12, 19, 3, 5, 2, 3]}
+                  label={["# of Votes"]}
+                  data={[[12, 19, 3, 5, 2, 3]]}
                 />
               </Paper>
             </Grid>
@@ -90,10 +100,6 @@ const Dashboard = () => {
               </Paper>
             </Grid>
           </Grid>
-
-          {/* <Grid item xs={12}>
-            <CustomPaginationActionsTable />
-          </Grid> */}
         </Grid>
       </div>
     </div>

@@ -7,18 +7,31 @@ const useStyles = makeStyles({
   title: { fontSize: "2rem" },
 });
 
-const chartData = (labels, label, data) => ({
-  labels,
-  datasets: [
-    {
-      label,
-      data,
+const color = [
+  "rgba(255, 99, 132, 1)",
+  "rgba(54, 162, 235, 1)",
+  "rgba(255, 206, 86, 1)",
+  "rgba(75, 192, 192, 1)",
+  "rgba(153, 102, 255, 1)",
+  "rgba(255, 159, 64, 1)",
+];
+
+const chartData = (labels, label, data) => {
+  let datasets = [];
+  for (let i = 0; i < label.length; i++) {
+    datasets.push({
+      label: label[i],
+      data: data[i],
       fill: false,
-      backgroundColor: "rgb(255, 99, 132)",
-      borderColor: "rgba(255, 99, 132, 1)",
-    },
-  ],
-});
+      backgroundColor: color[i],
+      borderColor: color[i],
+    });
+  }
+  return {
+    labels,
+    datasets,
+  };
+};
 
 const options = {
   scales: {
@@ -34,10 +47,10 @@ const options = {
 
 const LineChart = (props) => {
   const classes = useStyles();
-  const { labels, label, data } = props;
+  const { title, labels, label, data } = props;
   return (
     <>
-      <Typography className={classes.title}>Line Chart</Typography>
+      <Typography className={classes.title}>{title}</Typography>
       <Line data={chartData(labels, label, data)} options={options} />
     </>
   );
