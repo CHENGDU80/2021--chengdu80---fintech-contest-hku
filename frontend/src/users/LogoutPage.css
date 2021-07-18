@@ -1,37 +1,21 @@
-/* logout.html mobile*/
-@media screen and (max-width: 600px) {
-  #logout-div {
-    background-color: var(--theme-bg);
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-  }
-  #logout-content-div {
-    padding: 0 2rem;
-  }
-  .logout-text {
-    font-family: var(--barlow);
-    color: var(--theme-color-1);
-    font-size: 3rem;
-    font-weight: 200;
-  }
+#logout-div {
+  width: 100%;
+  height: 100%;
+}
+.logout-text {
+  font-family: var(--barlow);
+  color: var(--theme-color-1);
+  font-size: 3rem;
+  font-weight: 200;
 }
 
-/* logout.html web*/
-@media screen and (min-width: 600px) {
-  #logout-div {
-    background-color: var(--theme-bg);
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-  }
-  #logout-content-div {
-    padding: 0 2rem;
-  }
-  .logout-text {
-    font-family: var(--barlow);
-    color: var(--theme-color-1);
-    font-size: 3rem;
-    font-weight: 200;
-  }
+#logout-div {
+  width: 100%;
+  height: 100%;
+}
+.logout-text {
+  font-family: var(--barlow);
+  color: var(--theme-color-1);
+  font-size: 3rem;
+  font-weight: 200;
 }

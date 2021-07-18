@@ -9,6 +9,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { Button } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
@@ -45,18 +46,10 @@ function TablePaginationActions(props) {
 
   return (
     <div className={classes.root}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
+      <IconButton onClick={handleFirstPageButtonClick} disabled={page === 0}>
         {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
+      <IconButton onClick={handleBackButtonClick} disabled={page === 0}>
         {theme.direction === "rtl" ? (
           <KeyboardArrowRight />
         ) : (
@@ -66,7 +59,6 @@ function TablePaginationActions(props) {
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
       >
         {theme.direction === "rtl" ? (
           <KeyboardArrowLeft />
@@ -92,36 +84,25 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name, calories, fat) {
-  return { name, calories, fat };
-}
-
-const rows = [
-  createData("Cupcake", 305, 3.7),
-  createData("Donut", 452, 25.0),
-  createData("Eclair", 262, 16.0),
-  createData("Frozen yoghurt", 159, 6.0),
-  createData("Gingerbread", 356, 16.0),
-  createData("Honeycomb", 408, 3.2),
-  createData("Ice cream sandwich", 237, 9.0),
-  createData("Jelly Bean", 375, 0.0),
-  createData("KitKat", 518, 26.0),
-  createData("Lollipop", 392, 0.2),
-  createData("Marshmallow", 318, 0),
-  createData("Nougat", 360, 19.0),
-  createData("Oreo", 437, 18.0),
-];
-
 const useStyles2 = makeStyles({
   table: {
     minWidth: 500,
   },
+  tableCell: {
+    fontSize: "2rem",
+  },
+  button: {
+    fontSize: "2rem",
+    textTransform: "none",
+    fontWeight: 400,
+  },
 });
 
-export default function CustomPaginationActionsTable() {
+export default function CustomPaginationActionsTable(props) {
+  const { rows } = props;
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -136,22 +117,26 @@ export default function CustomPaginationActionsTable() {
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="custom pagination table">
+    <TableContainer>
+      <Table className={classes.table}>
         <TableBody>
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
             <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
+              <TableCell
+                component="th"
+                scope="row"
+                className={classes.tableCell}
+              >
                 {row.name}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              {/* <TableCell style={{ width: 160 }} align="right">
                 {row.calories}
-              </TableCell>
+              </TableCell> */}
               <TableCell style={{ width: 160 }} align="right">
-                {row.fat}
+                <Button className={classes.button}>More Info</Button>
               </TableCell>
             </TableRow>
           ))}

@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     width: "10rem",
   },
+  button: { fontSize: "2rem" },
   title: {
     flexGrow: 1,
   },
@@ -65,7 +67,9 @@ export default function ClippedDrawer(props) {
         <Toolbar>
           <img className={classes.logo} src={Logo} alt="logo" />
           <Typography variant="h6" className={classes.title}></Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" className={classes.button}>
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -78,17 +82,17 @@ export default function ClippedDrawer(props) {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem button key="Home">
+            <ListItem button key="Home" component={Link} to="/">
               <ListItemIcon>
                 <HomeIcon style={{ fontSize: 40 }} />
               </ListItemIcon>
             </ListItem>
-            <ListItem button key="Watchlist">
+            <ListItem button key="Watchlist" component={Link} to="/watchlist">
               <ListItemIcon>
                 <ListIcon style={{ fontSize: 40 }} />
               </ListItemIcon>
             </ListItem>
-            <ListItem button key="Logout">
+            <ListItem button key="Logout" component={Link} to="/logout">
               <ListItemIcon>
                 <AccountBoxIcon style={{ fontSize: 40 }} />
               </ListItemIcon>

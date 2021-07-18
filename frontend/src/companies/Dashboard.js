@@ -5,7 +5,6 @@ import News from "./News";
 import LineChart from "./LineChart";
 import DoughnutChart from "./Doughnut";
 import TwoLinesChart from "./TwoLinesChart";
-import CustomPaginationActionsTable from "./CustomPaginationActionsTable";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "2rem" },
@@ -92,13 +91,9 @@ const Dashboard = () => {
             </Grid>
           </Grid>
 
-          <Grid item xs={12}>
-            <Divider />
-          </Grid>
-
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <CustomPaginationActionsTable />
-          </Grid>
+          </Grid> */}
         </Grid>
       </div>
     </div>
