@@ -9,12 +9,13 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
+import SearchIcon from "@material-ui/icons/Search";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Button from "@material-ui/core/Button";
 import Logo from "../img/logo1.png";
 import HomeIcon from "@material-ui/icons/Home";
 import ListIcon from "@material-ui/icons/List";
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
+// import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 import HomePage from "../companies/HomePage";
 import Dashboard from "../companies/Dashboard";
@@ -123,7 +124,7 @@ export default function MyDrawer(props) {
           <List>
             <ListItem button key="Home" component={Link} to="/">
               <ListItemIcon>
-                <HomeIcon style={{ fontSize: 40 }} />
+                <SearchIcon style={{ fontSize: 40 }} />
               </ListItemIcon>
             </ListItem>
             <ListItem button key="Watchlist" component={Link} to="/watchlist">
@@ -131,11 +132,11 @@ export default function MyDrawer(props) {
                 <ListIcon style={{ fontSize: 40 }} />
               </ListItemIcon>
             </ListItem>
-            <ListItem button key="Logout" component={Link} to="/logout">
+            {/* <ListItem button key="Logout" component={Link} to="/logout">
               <ListItemIcon>
                 <AccountBoxIcon style={{ fontSize: 40 }} />
               </ListItemIcon>
-            </ListItem>
+            </ListItem> */}
             <Divider />
           </List>
         </div>

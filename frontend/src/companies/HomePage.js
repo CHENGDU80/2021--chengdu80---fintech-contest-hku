@@ -39,7 +39,7 @@ const HomePage = () => {
           <Paper component="form" className={classes.root}>
             <InputBase
               className={classes.input}
-              placeholder="Search..."
+              placeholder="Company ID"
               onChange={onChange}
             />
             <IconButton

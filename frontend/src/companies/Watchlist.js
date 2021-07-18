@@ -1,6 +1,8 @@
 import React from "react";
 import CustomPaginationActionsTable from "./CustomPaginationActionsTable";
 import { Paper, Typography, Box, Divider } from "@material-ui/core";
+import { selectUser } from "../users/usersSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function createData(name, calories, fat) {
   return { name, calories, fat };
@@ -23,16 +25,24 @@ const rows = [
 ];
 
 const Watchlist = () => {
+  let user = useSelector(selectUser);
+
   return (
     <div>
-      <Paper>
-        <Box p={3}>
-          <Typography variant="h4">Watchlist</Typography>
-          <Divider />
-          <CustomPaginationActionsTable rows={rows} />
-        </Box>
-      </Paper>
-      <br />
+      {user ? (
+        <div>
+          <Paper>
+            <Box p={3}>
+              <Typography variant="h4">Watchlist</Typography>
+              <Divider />
+              <CustomPaginationActionsTable rows={rows} />
+            </Box>
+          </Paper>
+          <br />
+        </div>
+      ) : (
+        <h1>Please Register or Login to view your watchlist</h1>
+      )}
     </div>
   );
 };
