@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const host = "http://127.0.0.1:5000";
-const initialState = { user: "" };
+const initialState = { user: "a" };
 
 export const login = createAsyncThunk(
   "users/login",
@@ -48,6 +48,6 @@ export const usersSlice = createSlice({
 
 export const { logout } = usersSlice.actions;
 
-export const selectUser = (state) => state.user;
+export const selectUser = (state) => state.users.user;
 
 export default usersSlice.reducer;

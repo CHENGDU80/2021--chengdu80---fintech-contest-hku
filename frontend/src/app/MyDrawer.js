@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,7 +12,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Button from "@material-ui/core/Button";
 import Logo from "../img/logo1.png";
-
 import HomeIcon from "@material-ui/icons/Home";
 import ListIcon from "@material-ui/icons/List";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
@@ -25,6 +24,9 @@ import RegisterPage from "../users/RegisterPage";
 import LoginPage from "../users/LoginPage";
 import LogoutPage from "../users/LogoutPage";
 
+import { selectUser, logout } from "../users/usersSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 const drawerWidth = 75;
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
   },
   logo: {
-    width: "10rem",
+    width: "4rem",
   },
   button: { fontSize: "2rem" },
   title: {
@@ -57,8 +59,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ClippedDrawer(props) {
+const login = (history) => {
+  history.push("/login");
+};
+const register = (history) => {
+  history.push("/register");
+};
+const onLogout = (dispatch, history) => {
+  dispatch(logout());
+  history.push("/logout");
+};
+
+export default function MyDrawer(props) {
   const classes = useStyles();
+  const history = useHistory();
+  let user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   return (
     <div className={classes.root}>
@@ -67,9 +83,32 @@ export default function ClippedDrawer(props) {
         <Toolbar>
           <img className={classes.logo} src={Logo} alt="logo" />
           <Typography variant="h6" className={classes.title}></Typography>
-          <Button color="inherit" className={classes.button}>
-            Login
-          </Button>
+          {user ? (
+            <Button
+              color="inherit"
+              className={classes.button}
+              onClick={() => onLogout(dispatch, history)}
+            >
+              Logout
+            </Button>
+          ) : (
+            <div>
+              <Button
+                color="inherit"
+                className={classes.button}
+                onClick={() => register(history)}
+              >
+                Register
+              </Button>
+              <Button
+                color="inherit"
+                className={classes.button}
+                onClick={() => login(history)}
+              >
+                Login
+              </Button>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer
