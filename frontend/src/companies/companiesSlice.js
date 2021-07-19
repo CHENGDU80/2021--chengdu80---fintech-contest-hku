@@ -7,8 +7,8 @@ const initialState = { profile: {}, risk: {} };
 export const search = createAsyncThunk(
   "companies/search",
   async (id, thunkAPI) => {
-    const response = await axios.get(host + "/api/search", JSON.stringify(id));
-    console.log(response);
+    const response = await axios.post(host + "/corporation/search", id);
+    // console.log(response);
     return response.data;
   }
 );
@@ -25,7 +25,7 @@ export const companiesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(search.fulfilled, (state, action) => {
-      state.search = action.payload;
+      state.profile = action.payload.data;
     });
     builder.addCase(risk.fulfilled, (state, action) => {
       state.risk = action.payload;

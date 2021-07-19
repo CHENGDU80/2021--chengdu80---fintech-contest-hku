@@ -38,7 +38,7 @@ const LoginPage = () => {
           setIsValid(false);
           setError(data.msg);
         } else {
-          history.push("/dashboard");
+          history.push("/");
         }
       })
       .catch(() => {

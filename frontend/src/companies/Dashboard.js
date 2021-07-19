@@ -3,7 +3,7 @@ import { Divider, Typography, Paper, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import BasicInfo from "./BasicInfo";
 import LineChart from "./LineChart";
-import DoughnutChart from "./Doughnut";
+// import DoughnutChart from "./Doughnut";
 import Crazy from "./Crazy";
 import { selectprofile } from "./companiesSlice";
 import {
@@ -16,6 +16,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { selectUser } from "../users/usersSlice";
 import IncomeStatement from "./IncomeStatement";
+import BalanceSheet from "./BalanceSheet";
+import RatioSheet from "./RatioSheet";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "2rem" },
@@ -57,20 +59,32 @@ const Dashboard = () => {
 
           <Grid item xs={4} container justifyContent="flex-end">
             <Grid item xs={7}>
-              {watchlist.find((company) => company.id === profile.id) ? (
-                <Button
-                  variant="contained"
-                  className={classes.button}
-                  color="primary"
-                  onClick={() => onRemove(dispatch, profile.id, username)}
-                >
-                  Remove from watchlist
-                </Button>
+              {username ? (
+                watchlist.find((company) => company.id === profile.id) ? (
+                  <Button
+                    variant="contained"
+                    className={classes.button}
+                    color="primary"
+                    onClick={() => onRemove(dispatch, profile.id, username)}
+                  >
+                    Remove from watchlist
+                  </Button>
+                ) : (
+                  <Button
+                    variant="contained"
+                    className={classes.button}
+                    color="primary"
+                    onClick={() => onAdd(dispatch, profile.id, username)}
+                  >
+                    Add to watchlist
+                  </Button>
+                )
               ) : (
                 <Button
                   variant="contained"
                   className={classes.button}
                   color="primary"
+                  disabled
                   onClick={() => onAdd(dispatch, profile.id, username)}
                 >
                   Add to watchlist
@@ -96,7 +110,7 @@ const Dashboard = () => {
           <Grid
             item
             xs={12}
-            md={8}
+            md={7}
             container
             spacing={2}
             alignContent="flex-start"
@@ -104,7 +118,7 @@ const Dashboard = () => {
             <Grid item xs={12}>
               <Paper className={classes.div}>
                 <LineChart
-                  title="Line Chart"
+                  title="Gross Profit, OPEX, Net Profit"
                   labels={["1", "2", "3", "4", "5", "6"]}
                   label={["# of Votes", "# of sth"]}
                   data={[
@@ -115,7 +129,48 @@ const Dashboard = () => {
               </Paper>
             </Grid>
 
-            <Grid item xs={5}>
+            <Grid item xs={12}>
+              <Paper className={classes.div}>
+                <Crazy
+                  title="Total Liabilities, Shareholder Equity"
+                  type={["bar", "bar"]}
+                  labels={["1", "2", "3", "4", "5", "6"]}
+                  label={["# of Votes", "# of sth"]}
+                  data={[
+                    [12, 19, 3, 5, 2, 3],
+                    [5, 2, 8, 1, 12, 3],
+                  ]}
+                />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.div}>
+                <LineChart
+                  title="Debt Equity Ratio"
+                  labels={["1", "2", "3", "4", "5", "6"]}
+                  label={["# of Votes", "# of sth"]}
+                  data={[
+                    [12, 19, 3, 5, 2, 3],
+                    [5, 2, 8, 1, 12, 3],
+                  ]}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper className={classes.div}>
+                <LineChart
+                  title="ROE"
+                  labels={["1", "2", "3", "4", "5", "6"]}
+                  label={["# of Votes", "# of sth"]}
+                  data={[
+                    [12, 19, 3, 5, 2, 3],
+                    [5, 2, 8, 1, 12, 3],
+                  ]}
+                />
+              </Paper>
+            </Grid>
+            {/* <Grid item xs={5}>
               <Paper className={classes.div}>
                 <DoughnutChart
                   title="Doughnut"
@@ -150,13 +205,13 @@ const Dashboard = () => {
                   ]}
                 />
               </Paper>
-            </Grid>
+            </Grid> */}
           </Grid>
 
           <Grid
             item
             xs={8}
-            md={4}
+            md={5}
             container
             spacing={2}
             alignContent="flex-start"
@@ -187,7 +242,7 @@ const Dashboard = () => {
             </Grid>
             <Grid item xs={12}>
               <Paper>
-                <IncomeStatement
+                {/* <IncomeStatement
                   revenue={profile.revenue}
                   main_business_income={profile.main_business_income}
                   other_business_income={profile.other_business_income}
@@ -208,7 +263,30 @@ const Dashboard = () => {
                   finance_expense={profile.finance_expense}
                   RATGRO={profile.RATGRO}
                   retained_profits={profile.retained_profits}
-                />
+                /> */}
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper>
+                {/* <BalanceSheet
+                  ASSGRO={profile.ASSGRO}
+                  LIAGRO={profile.LIAGRO}
+                  TOTEQU={profile.TOTEQU}
+                /> */}
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper>
+                {/* <RatioSheet
+                  debtEquityRatio={profile.debtEquityRatio}
+                  returnOnEquity={profile.returnOnEquity}
+                  returnOnAssets={profile.returnOnAssets}
+                  grossProfitMargin={profile.grossProfitMargin}
+                  opexRatio={profile.opexRatio}
+                  netProfitMarginRatio={profile.netProfitMarginRatio}
+                /> */}
               </Paper>
             </Grid>
           </Grid>

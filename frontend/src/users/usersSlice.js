@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const host = "http://127.0.0.1:5000";
-const initialState = { user: "a", watchlist: [] };
+const initialState = { user: "", watchlist: [] };
 
 export const login = createAsyncThunk(
   "/api/login",
   async (userInfo, thunkAPI) => {
     const response = await axios.post(
-      host + "/api/login",
+      host + "/auth/login",
       JSON.stringify(userInfo)
     );
     console.log(response);
@@ -20,7 +20,7 @@ export const register = createAsyncThunk(
   "api/register",
   async (userInfo, thunkAPI) => {
     const response = await axios.post(
-      host + "/api/register",
+      host + "/auth/register",
       JSON.stringify(userInfo)
     );
     console.log(response);
