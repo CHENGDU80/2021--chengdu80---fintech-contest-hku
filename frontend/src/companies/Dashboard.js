@@ -1,11 +1,11 @@
 import React from "react";
 import { Divider, Typography, Paper, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import News from "./News";
+import BasicInfo from "./BasicInfo";
 import LineChart from "./LineChart";
 import DoughnutChart from "./Doughnut";
 import Crazy from "./Crazy";
-import { selectprofile, selectrisk } from "./companiesSlice";
+import { selectprofile } from "./companiesSlice";
 import {
   getWatchlist,
   putWatchlist,
@@ -14,6 +14,8 @@ import {
 } from "../users/usersSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { selectUser } from "../users/usersSlice";
+import IncomeStatement from "./IncomeStatement";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "2rem" },
@@ -22,13 +24,13 @@ const useStyles = makeStyles({
   button: { fontSize: "1rem", color: "primary" },
 });
 
-const onRemove = (dispatch, id) => {
-  dispatch(() => deleteWatchlist(id));
+const onRemove = (dispatch, companyId, username) => {
+  dispatch(() => deleteWatchlist({ username, companyId }));
   dispatch(getWatchlist);
 };
-const onAdd = (dispatch, id) => {
-  dispatch(() => putWatchlist(id));
-  dispatch(getWatchlist);
+const onAdd = (dispatch, companyId, username) => {
+  dispatch(() => putWatchlist({ username, companyId }));
+  dispatch(() => getWatchlist({ username }));
 };
 const onRisk = (history) => {
   history.push("/riskanalysis");
@@ -38,6 +40,8 @@ const Dashboard = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  let username = useSelector(selectUser);
+  dispatch(() => getWatchlist({ username }));
   let watchlist = useSelector(selectWatchlist);
   let profile = useSelector(selectprofile);
   return (
@@ -53,12 +57,12 @@ const Dashboard = () => {
 
           <Grid item xs={4} container justifyContent="flex-end">
             <Grid item xs={7}>
-              {watchlist.find((company) => company.id === profile.name) ? (
+              {watchlist.find((company) => company.id === profile.id) ? (
                 <Button
                   variant="contained"
                   className={classes.button}
                   color="primary"
-                  onClick={() => onRemove(dispatch, profile.id)}
+                  onClick={() => onRemove(dispatch, profile.id, username)}
                 >
                   Remove from watchlist
                 </Button>
@@ -67,7 +71,7 @@ const Dashboard = () => {
                   variant="contained"
                   className={classes.button}
                   color="primary"
-                  onClick={() => onAdd(dispatch, profile.id)}
+                  onClick={() => onAdd(dispatch, profile.id, username)}
                 >
                   Add to watchlist
                 </Button>
@@ -149,10 +153,62 @@ const Dashboard = () => {
             </Grid>
           </Grid>
 
-          <Grid item xs={8} md={4}>
+          <Grid
+            item
+            xs={8}
+            md={4}
+            container
+            spacing={2}
+            alignContent="flex-start"
+          >
             <Grid item xs={12}>
               <Paper>
-                <News />
+                <BasicInfo
+                  entid={profile.entid}
+                  ENTTYPE={profile.ENTTYPE}
+                  INDUSTRYPHY={profile.INDUSTRYPHY}
+                  REGCAPCUR={profile.REGCAPCUR}
+                  REGCAP={profile.REGCAP}
+                  PARNUM={profile.PARNUM}
+                  LIMPARNUM={profile.LIMPARNUM}
+                  PARFORM={profile.PARFORM}
+                  EXENUM={profile.EXENUM}
+                  EMPNUM={profile.EMPNUM}
+                  tax_type={profile.tax_type}
+                  tax_state={profile.tax_state}
+                  region_id={profile.region_id}
+                  industry_tax={profile.industry_tax}
+                  registertype={profile.registertype}
+                  economic_type={profile.economic_type}
+                  incometax_rate={profile.incometax_rate}
+                  collection_type={profile.collection_type}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper>
+                <IncomeStatement
+                  revenue={profile.revenue}
+                  main_business_income={profile.main_business_income}
+                  other_business_income={profile.other_business_income}
+                  VENDINC={profile.VENDINC}
+                  non_operating_income={profile.non_operating_income}
+                  sales_cost={profile.sales_cost}
+                  main_business_cost={profile.main_business_cost}
+                  other_operating_cost={profile.other_operating_cost}
+                  gross_profit={profile.gross_profit}
+                  main_business_gross={profile.main_business_gross}
+                  sales_expense={profile.sales_expense}
+                  payrol_expense={profile.payrol_expense}
+                  welfare_expenses={profile.welfare_expenses}
+                  education_expenses={profile.education_expenses}
+                  ad_expenses={profile.ad_expenses}
+                  non_operating_expense={profile.non_operating_expense}
+                  G_expense={profile.G_expense}
+                  finance_expense={profile.finance_expense}
+                  RATGRO={profile.RATGRO}
+                  retained_profits={profile.retained_profits}
+                />
               </Paper>
             </Grid>
           </Grid>

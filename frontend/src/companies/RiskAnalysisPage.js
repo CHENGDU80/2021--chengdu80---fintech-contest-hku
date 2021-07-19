@@ -53,7 +53,7 @@ const RiskAnalysisPage = () => {
 
           <Grid item xs={4} container justifyContent="flex-end">
             <Grid item xs={7}>
-              {watchlist.find((company) => company.id === profile.name) ? (
+              {watchlist.find((company) => company.id === profile.id) ? (
                 <Button
                   variant="contained"
                   className={classes.button}
