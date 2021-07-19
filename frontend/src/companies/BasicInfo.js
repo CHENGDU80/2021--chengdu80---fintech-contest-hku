@@ -4,8 +4,8 @@ import { Typography, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "1rem" },
-  heading: { fontSize: "1.5rem" },
-  subheading: { fontSize: "1rem" },
+  heading: { fontSize: "1.5rem", variant: "h3", marginBottom: 10 },
+  subheading: { fontSize: "1rem", variant: "p", marginBottom: 10 },
   button: { fontSize: "1rem", color: "primary" },
 });
 

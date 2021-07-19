@@ -41,7 +41,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   let username = useSelector(selectUser);
-  dispatch(() => getWatchlist({ username }));
+  // dispatch(() => getWatchlist({ username }));
   let watchlist = useSelector(selectWatchlist);
   let profile = useSelector(selectprofile);
   return (
