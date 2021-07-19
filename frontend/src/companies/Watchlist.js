@@ -2,7 +2,8 @@ import React from "react";
 import CustomPaginationActionsTable from "./CustomPaginationActionsTable";
 import { Paper, Typography, Box, Divider } from "@material-ui/core";
 import { selectUser } from "../users/usersSlice";
-import { useSelector } from "react-redux";
+import { getWatchlist, selectWatchlist } from "../users/usersSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function createData(name, id, fat) {
   return { name, id, fat };
@@ -26,6 +27,9 @@ const rows = [
 
 const Watchlist = () => {
   let user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  dispatch(getWatchlist);
+  let watchlist = useSelector(selectWatchlist);
 
   return (
     <div>

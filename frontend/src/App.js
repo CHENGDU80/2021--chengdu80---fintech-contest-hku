@@ -21,7 +21,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Barlow Semi Condensed",
+    fontFamily: "Poppins",
   },
 });
 

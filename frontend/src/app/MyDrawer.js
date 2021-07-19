@@ -13,7 +13,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Button from "@material-ui/core/Button";
 import Logo from "../img/logo1.png";
-import HomeIcon from "@material-ui/icons/Home";
 import ListIcon from "@material-ui/icons/List";
 // import AccountBoxIcon from "@material-ui/icons/AccountBox";
 

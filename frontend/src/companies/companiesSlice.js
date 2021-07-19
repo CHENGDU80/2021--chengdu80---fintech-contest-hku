@@ -7,29 +7,35 @@ const initialState = { profile: {}, risk: {} };
 export const search = createAsyncThunk(
   "companies/search",
   async (id, thunkAPI) => {
-    const response = await axios.post(host + "/api/search", JSON.stringify(id));
+    const response = await axios.get(host + "/api/search", JSON.stringify(id));
     console.log(response);
     return response.data;
   }
 );
 
+export const risk = createAsyncThunk("companies/risk", async (id, thunkAPI) => {
+  const response = await axios.get(host + "/api/risk", JSON.stringify(id));
+  console.log(response);
+  return response.data;
+});
+
 export const companiesSlice = createSlice({
   name: "companies",
   initialState,
   reducers: {},
-  // extraReducers: (builder) => {
-  //   builder.addCase(login.fulfilled, (state, action) => {
-  //     state.user = action.payload;
-  //   });
-  //   builder.addCase(register.fulfilled, (state, action) => {
-  //     state.user = action.payload;
-  //   });
-  // },
+  extraReducers: (builder) => {
+    builder.addCase(search.fulfilled, (state, action) => {
+      state.search = action.payload;
+    });
+    builder.addCase(risk.fulfilled, (state, action) => {
+      state.risk = action.payload;
+    });
+  },
 });
 
 // export const { logout } = usersSlice.actions;
 
-export const selectprofile = (state) => state.profile;
-export const selectrisk = (state) => state.risk;
+export const selectprofile = (state) => state.companies.profile;
+export const selectrisk = (state) => state.companies.risk;
 
 export default companiesSlice.reducer;
