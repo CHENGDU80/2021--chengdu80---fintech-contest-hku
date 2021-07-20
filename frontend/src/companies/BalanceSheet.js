@@ -4,18 +4,20 @@ import { Typography, Grid, Divider } from "@material-ui/core";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "1rem" },
-  heading: { fontSize: "1.5rem", variant: "h3", marginBottom: 10 },
+  heading: { fontSize: "1.5rem", variant: "h4", marginBottom: 10 },
   subheading: {
     fontSize: "1rem",
     variant: "p",
     marginBottom: 10,
     fontWeight: "600",
+    overflowWrap: "break-word",
   },
   normalText: {
     fontSize: "1rem",
     variant: "p",
     marginBottom: 10,
     fontWeight: "400",
+    overflowWrap: "break-word",
   },
   button: { fontSize: "1rem", color: "primary" },
   divider: { marginBottom: 10 },
@@ -34,28 +36,28 @@ const BalanceSheet = (props) => {
           <Divider className={classes.divider} />
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <Typography className={classes.normalText}>TOTAL ASSETS</Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <Typography className={classes.normalText}>{props.ASSGRO}</Typography>
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <Typography className={classes.normalText}>
             TOTAL LIABILITIES
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <Typography className={classes.normalText}>{props.LIAGRO}</Typography>
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <Typography className={classes.normalText}>
             SHAREHOLDER EQUITY
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <Typography className={classes.normalText}>{props.TOTEQU}</Typography>
         </Grid>
       </Grid>

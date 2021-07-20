@@ -46,6 +46,11 @@ const Dashboard = () => {
   // dispatch(() => getWatchlist({ username }));
   let watchlist = useSelector(selectWatchlist);
   let profile = useSelector(selectprofile);
+  // for (const [key, value] of Object.entries(profile)) {
+  //   if (!profile[key]) {
+  //     profile[key] = "No Data";
+  //   }
+  // }
   return (
     <div>
       <div className={classes.div}>
@@ -118,13 +123,32 @@ const Dashboard = () => {
             <Grid item xs={12}>
               <Paper className={classes.div}>
                 <LineChart
-                  title="Gross Profit, OPEX, Net Profit"
-                  labels={["1", "2", "3", "4", "5", "6"]}
-                  label={["# of Votes", "# of sth"]}
-                  data={[
-                    [12, 19, 3, 5, 2, 3],
-                    [5, 2, 8, 1, 12, 3],
-                  ]}
+                  title="Gross Profit"
+                  labels={Object.keys(profile.gross_profit)}
+                  label={["Gross Profit"]}
+                  data={[Object.values(profile.gross_profit)]}
+                />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.div}>
+                <LineChart
+                  title="OPEX (Operating Expenses)"
+                  labels={Object.keys(profile.sales_expense)}
+                  label={["OPEX"]}
+                  data={[Object.values(profile.sales_expense)]}
+                />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.div}>
+                <LineChart
+                  title="Net Profit"
+                  labels={Object.keys(profile.retained_profits)}
+                  label={["Net Profit"]}
+                  data={[Object.values(profile.retained_profits)]}
                 />
               </Paper>
             </Grid>
@@ -134,11 +158,11 @@ const Dashboard = () => {
                 <Crazy
                   title="Total Liabilities, Shareholder Equity"
                   type={["bar", "bar"]}
-                  labels={["1", "2", "3", "4", "5", "6"]}
-                  label={["# of Votes", "# of sth"]}
+                  labels={Object.keys(profile.LIAGRO)}
+                  label={["Total Liabilities", "Shareholder Equity"]}
                   data={[
-                    [12, 19, 3, 5, 2, 3],
-                    [5, 2, 8, 1, 12, 3],
+                    Object.values(profile.LIAGRO),
+                    Object.values(profile.TOTEQU),
                   ]}
                 />
               </Paper>
@@ -148,28 +172,24 @@ const Dashboard = () => {
               <Paper className={classes.div}>
                 <LineChart
                   title="Debt Equity Ratio"
-                  labels={["1", "2", "3", "4", "5", "6"]}
-                  label={["# of Votes", "# of sth"]}
-                  data={[
-                    [12, 19, 3, 5, 2, 3],
-                    [5, 2, 8, 1, 12, 3],
-                  ]}
+                  labels={Object.keys(profile.debtEquityRatio)}
+                  label={["Debt Equity Ratio"]}
+                  data={[Object.values(profile.debtEquityRatio)]}
                 />
               </Paper>
             </Grid>
-            <Grid item xs={12}>
+
+            {/* <Grid item xs={12}>
               <Paper className={classes.div}>
                 <LineChart
-                  title="ROE"
-                  labels={["1", "2", "3", "4", "5", "6"]}
-                  label={["# of Votes", "# of sth"]}
-                  data={[
-                    [12, 19, 3, 5, 2, 3],
-                    [5, 2, 8, 1, 12, 3],
-                  ]}
+                  title="Return on Equity (ROE)"
+                  labels={Object.keys(profile.returnOnEquity)}
+                  label={["Return on Equity"]}
+                  data={[Object.values(profile.returnOnEquity)]}
                 />
               </Paper>
-            </Grid>
+            </Grid> */}
+
             {/* <Grid item xs={5}>
               <Paper className={classes.div}>
                 <DoughnutChart
@@ -177,32 +197,6 @@ const Dashboard = () => {
                   labels={["1", "2", "3"]}
                   label={["# of Votes"]}
                   data={[12, 19, 3]}
-                />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={7}>
-              <Paper className={classes.div}>
-                <LineChart
-                  title="Line Chart"
-                  labels={["1", "2", "3", "4", "5", "6"]}
-                  label={["# of Votes"]}
-                  data={[[12, 19, 3, 5, 2, 3]]}
-                />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.div}>
-                <Crazy
-                  title="Line Bar"
-                  type={["line", "bar"]}
-                  labels={["1", "2", "3", "4", "5", "6"]}
-                  label={["# of Votes", "# of sth"]}
-                  data={[
-                    [12, 19, 3, 5, 2, 3],
-                    [5, 2, 8, 1, 12, 3],
-                  ]}
                 />
               </Paper>
             </Grid> */}
@@ -242,8 +236,14 @@ const Dashboard = () => {
             </Grid>
             <Grid item xs={12}>
               <Paper>
-                {/* <IncomeStatement
-                  revenue={profile.revenue}
+                <IncomeStatement
+                  revenue={
+                    profile.revenue[
+                      Object.keys(profile.revenue)[
+                        Object.keys(profile.revenue).length - 1
+                      ]
+                    ]
+                  }
                   main_business_income={profile.main_business_income}
                   other_business_income={profile.other_business_income}
                   VENDINC={profile.VENDINC}
@@ -251,9 +251,21 @@ const Dashboard = () => {
                   sales_cost={profile.sales_cost}
                   main_business_cost={profile.main_business_cost}
                   other_operating_cost={profile.other_operating_cost}
-                  gross_profit={profile.gross_profit}
+                  gross_profit={
+                    profile.gross_profit[
+                      Object.keys(profile.gross_profit)[
+                        Object.keys(profile.gross_profit).length - 1
+                      ]
+                    ]
+                  }
                   main_business_gross={profile.main_business_gross}
-                  sales_expense={profile.sales_expense}
+                  sales_expense={
+                    profile.sales_expense[
+                      Object.keys(profile.sales_expense)[
+                        Object.keys(profile.sales_expense).length - 1
+                      ]
+                    ]
+                  }
                   payrol_expense={profile.payrol_expense}
                   welfare_expenses={profile.welfare_expenses}
                   education_expenses={profile.education_expenses}
@@ -262,31 +274,79 @@ const Dashboard = () => {
                   G_expense={profile.G_expense}
                   finance_expense={profile.finance_expense}
                   RATGRO={profile.RATGRO}
-                  retained_profits={profile.retained_profits}
-                /> */}
+                  retained_profits={
+                    profile.retained_profits[
+                      Object.keys(profile.retained_profits)[
+                        Object.keys(profile.retained_profits).length - 1
+                      ]
+                    ]
+                  }
+                />
               </Paper>
             </Grid>
 
             <Grid item xs={12}>
               <Paper>
-                {/* <BalanceSheet
-                  ASSGRO={profile.ASSGRO}
-                  LIAGRO={profile.LIAGRO}
-                  TOTEQU={profile.TOTEQU}
-                /> */}
+                <BalanceSheet
+                  ASSGRO={
+                    profile.ASSGRO[
+                      Object.keys(profile.ASSGRO)[
+                        Object.keys(profile.ASSGRO).length - 1
+                      ]
+                    ]
+                  }
+                  LIAGRO={
+                    profile.LIAGRO[
+                      Object.keys(profile.LIAGRO)[
+                        Object.keys(profile.LIAGRO).length - 1
+                      ]
+                    ]
+                  }
+                  TOTEQU={
+                    profile.TOTEQU[
+                      Object.keys(profile.TOTEQU)[
+                        Object.keys(profile.TOTEQU).length - 1
+                      ]
+                    ]
+                  }
+                />
               </Paper>
             </Grid>
 
             <Grid item xs={12}>
               <Paper>
-                {/* <RatioSheet
-                  debtEquityRatio={profile.debtEquityRatio}
+                <RatioSheet
+                  debtEquityRatio={
+                    profile.debtEquityRatio[
+                      Object.keys(profile.debtEquityRatio)[
+                        Object.keys(profile.debtEquityRatio).length - 1
+                      ]
+                    ]
+                  }
                   returnOnEquity={profile.returnOnEquity}
                   returnOnAssets={profile.returnOnAssets}
-                  grossProfitMargin={profile.grossProfitMargin}
-                  opexRatio={profile.opexRatio}
-                  netProfitMarginRatio={profile.netProfitMarginRatio}
-                /> */}
+                  grossProfitMargin={
+                    profile.grossProfitMargin[
+                      Object.keys(profile.grossProfitMargin)[
+                        Object.keys(profile.grossProfitMargin).length - 1
+                      ]
+                    ]
+                  }
+                  opexRatio={
+                    profile.opexRatio[
+                      Object.keys(profile.opexRatio)[
+                        Object.keys(profile.opexRatio).length - 1
+                      ]
+                    ]
+                  }
+                  netProfitMarginRatio={
+                    profile.netProfitMarginRatio[
+                      Object.keys(profile.netProfitMarginRatio)[
+                        Object.keys(profile.netProfitMarginRatio).length - 1
+                      ]
+                    ]
+                  }
+                />
               </Paper>
             </Grid>
           </Grid>

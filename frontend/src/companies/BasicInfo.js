@@ -4,14 +4,15 @@ import { Typography, Grid, Divider } from "@material-ui/core";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "1rem" },
-  heading: { fontSize: "1.5rem", variant: "h3" },
-  subheading: { fontSize: "1rem", variant: "p" },
+  heading: { fontSize: "1.5rem", variant: "h3", overflowWrap: "break-word" },
+  subheading: { fontSize: "1rem", variant: "p", overflowWrap: "break-word" },
   button: { fontSize: "1rem", color: "primary" },
   divider: { marginBottom: 10 },
 });
 
 const BasicInfo = (props) => {
   const classes = useStyles();
+
   return (
     <div className={classes.div}>
       <Grid container spacing={1}>

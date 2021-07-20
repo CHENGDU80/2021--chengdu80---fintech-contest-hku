@@ -4,18 +4,20 @@ import { Typography, Grid, Divider } from "@material-ui/core";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "1rem" },
-  heading: { fontSize: "1.5rem", variant: "h3", marginBottom: 10 },
+  heading: { fontSize: "1.5rem", variant: "h5", marginBottom: 10 },
   subheading: {
     fontSize: "1rem",
     variant: "p",
     marginBottom: 10,
     fontWeight: "600",
+    overflowWrap: "break-word",
   },
   normalText: {
     fontSize: "1rem",
     variant: "p",
     marginBottom: 10,
     fontWeight: "400",
+    overflowWrap: "break-word",
   },
   button: { fontSize: "1rem", color: "primary" },
   divider: { marginBottom: 10 },
@@ -34,65 +36,65 @@ const BalanceSheet = (props) => {
           <Divider className={classes.divider} />
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={7}>
           <Typography className={classes.normalText}>
             Debt-Equity Ratio
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={5}>
           <Typography className={classes.normalText}>
-            {/* {props.debtEquityRatio[props.debtEquityRatio.length - 1]} */}
+            {props.debtEquityRatio}
           </Typography>
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={7}>
           <Typography className={classes.normalText}>
             Return on Equity (ROE)
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={5}>
           <Typography className={classes.normalText}>
-            {/* {props.returnOnEquity[props.returnOnEquity.length - 1]} */}
+            {props.returnOnEquity}
           </Typography>
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={7}>
           <Typography className={classes.normalText}>
             Return on Assets (ROA)
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={5}>
           <Typography className={classes.normalText}>
             {props.returnOnAssets}
           </Typography>
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={7}>
           <Typography className={classes.normalText}>
             Gross Profit Margin
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={5}>
           <Typography className={classes.normalText}>
             {props.grossProfitMargin}
           </Typography>
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={7}>
           <Typography className={classes.normalText}>OPEX Ratio</Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={5}>
           <Typography className={classes.normalText}>
             {props.opexRatio}
           </Typography>
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={7}>
           <Typography className={classes.normalText}>
             Net Profit Margin Ratio
           </Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={5}>
           <Typography className={classes.normalText}>
             {props.netProfitMarginRatio}
           </Typography>

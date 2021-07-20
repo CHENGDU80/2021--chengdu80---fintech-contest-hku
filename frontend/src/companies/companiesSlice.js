@@ -28,7 +28,7 @@ export const companiesSlice = createSlice({
       state.profile = action.payload.data;
     });
     builder.addCase(risk.fulfilled, (state, action) => {
-      state.risk = action.payload;
+      state.risk = action.payload.data;
     });
   },
 });
