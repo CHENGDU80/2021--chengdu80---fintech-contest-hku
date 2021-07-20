@@ -51,16 +51,34 @@ const RiskAnalysisPage = () => {
   });
 
   const onRemove = (dispatch, companyId, username) => {
-    dispatch(deleteWatchlist({ username, companyId }));
-    dispatch(getWatchlist({ username }));
+    dispatch(deleteWatchlist({ username, companyId }))
+      .unwrap()
+      .then((data) => {
+        if (data.res === -1) {
+          console.log(data);
+        } else {
+          dispatch(getWatchlist({ username }));
+        }
+      });
   };
   const onAdd = (dispatch, companyId, username) => {
-    dispatch(putWatchlist({ username, companyId }));
-    dispatch(getWatchlist({ username }));
+    dispatch(putWatchlist({ username, companyId }))
+      .unwrap()
+      .then((data) => {
+        if (data.res === -1) {
+          console.log(data);
+        } else {
+          dispatch(getWatchlist({ username }));
+        }
+      });
   };
   const onDashboard = (history) => {
     history.push("/dashboard");
   };
+
+  if (!profile) {
+    return <div />;
+  }
 
   return (
     <div>
@@ -156,7 +174,7 @@ const RiskAnalysisPage = () => {
                 <Box p={3}>
                   <Typography variant="h4">Relevant Company</Typography>
                   <Divider />
-                  {cluster.length !== 0 ? (
+                  {Object.keys(cluster).length !== 0 ? (
                     <CustomPaginationActionsTable rows={cluster} />
                   ) : (
                     <Typography>No Relevant Company</Typography>

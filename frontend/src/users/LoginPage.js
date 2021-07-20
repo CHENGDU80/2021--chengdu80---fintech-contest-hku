@@ -3,7 +3,7 @@ import logo from "../img/logo.png";
 import "./LoginPage.css";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "./usersSlice";
+import { login, getWatchlist } from "./usersSlice";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -26,6 +26,7 @@ const LoginPage = () => {
           setIsValid(false);
           setError(data.msg);
         } else {
+          dispatch(getWatchlist({ username }));
           history.push("/");
         }
       })

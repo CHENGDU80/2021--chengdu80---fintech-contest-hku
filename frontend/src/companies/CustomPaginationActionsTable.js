@@ -120,8 +120,15 @@ export default function CustomPaginationActionsTable(props) {
   };
 
   const onMoreInfo = (dispatch, id, history) => {
-    dispatch(search({ id }));
-    history.push("/dashboard");
+    dispatch(search({ id }))
+      .unwrap()
+      .then((data) => {
+        if (data.res === -1) {
+          console.log(data);
+        } else {
+          history.push("/dashboard");
+        }
+      });
   };
 
   return (

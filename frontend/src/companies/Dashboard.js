@@ -41,12 +41,26 @@ const Dashboard = () => {
   });
 
   const onRemove = (dispatch, companyId, username) => {
-    dispatch(deleteWatchlist({ username, companyId }));
-    dispatch(getWatchlist({ username }));
+    dispatch(deleteWatchlist({ username, companyId }))
+      .unwrap()
+      .then((data) => {
+        if (data.res === -1) {
+          console.log(data);
+        } else {
+          dispatch(getWatchlist({ username }));
+        }
+      });
   };
   const onAdd = (dispatch, companyId, username) => {
-    dispatch(putWatchlist({ username, companyId }));
-    dispatch(getWatchlist({ username }));
+    dispatch(putWatchlist({ username, companyId }))
+      .unwrap()
+      .then((data) => {
+        if (data.res === -1) {
+          console.log(data);
+        } else {
+          dispatch(getWatchlist({ username }));
+        }
+      });
   };
   const onRisk = (dispatch, companyId, history) => {
     dispatch(risk({ companyId }));
@@ -57,7 +71,6 @@ const Dashboard = () => {
   if (!profile.entid) {
     return <div />;
   }
-  console.log(watchlist);
   return (
     <div>
       <div className={classes.div}>
@@ -72,7 +85,6 @@ const Dashboard = () => {
           <Grid item xs={4} container justifyContent="flex-end">
             <Grid item xs={7}>
               {username ? (
-                !watchlist ||
                 watchlist.find((company) => company.entid === profile.entid) ? (
                   <Button
                     variant="contained"

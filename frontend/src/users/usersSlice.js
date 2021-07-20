@@ -65,6 +65,7 @@ export const usersSlice = createSlice({
   reducers: {
     logout(state, action) {
       state.user = "";
+      state.watchlist = [];
     },
   },
   extraReducers: (builder) => {
@@ -79,8 +80,7 @@ export const usersSlice = createSlice({
       }
     });
     builder.addCase(putWatchlist.fulfilled, (state, action) => {
-      // state.watchlist.push(action.payload.data);
-      // console.log(action.payload.data);
+      state.watchlist.push(action.payload.data);
     });
     builder.addCase(getWatchlist.fulfilled, (state, action) => {
       state.watchlist = action.payload.data;
