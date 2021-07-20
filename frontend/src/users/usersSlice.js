@@ -29,12 +29,10 @@ export const register = createAsyncThunk(
 export const getWatchlist = createAsyncThunk(
   "/corporation/watch_list",
   async (userInfo, thunkAPI) => {
-    // console.log(userInfo);
     const response = await axios.post(
       host + "/corporation/watch_list",
       JSON.stringify(userInfo)
     );
-    // console.log(response);
     return response.data;
   }
 );
@@ -44,10 +42,8 @@ export const putWatchlist = createAsyncThunk(
   async (userInfo, thunkAPI) => {
     const response = await axios.post(
       host + "/corporation/watch_add",
-      // JSON.stringify(userInfo)
       userInfo
     );
-    console.log(response);
     return response.data;
   }
 );
@@ -59,7 +55,6 @@ export const deleteWatchlist = createAsyncThunk(
       host + "/corporation/watch_delete",
       JSON.stringify(userInfo)
     );
-    // console.log(response);
     return response.data;
   }
 );
@@ -82,6 +77,10 @@ export const usersSlice = createSlice({
       if (action.payload.res !== -1) {
         state.user = action.meta.arg.username;
       }
+    });
+    builder.addCase(putWatchlist.fulfilled, (state, action) => {
+      // state.watchlist.push(action.payload.data);
+      // console.log(action.payload.data);
     });
     builder.addCase(getWatchlist.fulfilled, (state, action) => {
       state.watchlist = action.payload.data;

@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Divider, Typography, Paper, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import BasicInfo from "./BasicInfo";
 import LineChart from "./LineChart";
 // import DoughnutChart from "./Doughnut";
 import Crazy from "./Crazy";
-import { selectprofile } from "./companiesSlice";
+import { risk, cluster, selectprofile } from "./companiesSlice";
 import {
   getWatchlist,
   putWatchlist,
@@ -26,18 +26,6 @@ const useStyles = makeStyles({
   button: { fontSize: "1rem", color: "primary" },
 });
 
-const onRemove = (dispatch, companyId, username) => {
-  dispatch(deleteWatchlist({ username, companyId }));
-  dispatch(getWatchlist({ username }));
-};
-const onAdd = (dispatch, companyId, username) => {
-  dispatch(putWatchlist({ username, companyId }));
-  // dispatch(getWatchlist({ username }));
-};
-const onRisk = (history) => {
-  history.push("/riskanalysis");
-};
-
 const Dashboard = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -45,11 +33,31 @@ const Dashboard = () => {
   let username = useSelector(selectUser);
   let watchlist = useSelector(selectWatchlist);
   let profile = useSelector(selectprofile);
-  // for (const [key, value] of Object.entries(profile)) {
-  //   if (!profile[key]) {
-  //     profile[key] = "No Data";
-  //   }
-  // }
+
+  useEffect(() => {
+    if (watchlist === null) {
+      dispatch(getWatchlist({ username }));
+    }
+  });
+
+  const onRemove = (dispatch, companyId, username) => {
+    dispatch(deleteWatchlist({ username, companyId }));
+    dispatch(getWatchlist({ username }));
+  };
+  const onAdd = (dispatch, companyId, username) => {
+    dispatch(putWatchlist({ username, companyId }));
+    dispatch(getWatchlist({ username }));
+  };
+  const onRisk = (dispatch, companyId, history) => {
+    dispatch(risk({ companyId }));
+    dispatch(cluster({ id: companyId }));
+    history.push("/riskanalysis");
+  };
+
+  if (!profile.entid) {
+    return <div />;
+  }
+  console.log(watchlist);
   return (
     <div>
       <div className={classes.div}>
@@ -64,7 +72,8 @@ const Dashboard = () => {
           <Grid item xs={4} container justifyContent="flex-end">
             <Grid item xs={7}>
               {username ? (
-                watchlist.find((company) => company.id === profile.id) ? (
+                !watchlist ||
+                watchlist.find((company) => company.entid === profile.entid) ? (
                   <Button
                     variant="contained"
                     className={classes.button}
@@ -103,7 +112,9 @@ const Dashboard = () => {
                 variant="contained"
                 className={classes.button}
                 color="primary"
-                onClick={() => onRisk(history)}
+                onClick={() =>
+                  onRisk(dispatch, profile.entid.toString(), history)
+                }
               >
                 Risk Analysis
               </Button>

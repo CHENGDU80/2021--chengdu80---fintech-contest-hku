@@ -132,19 +132,19 @@ export default function CustomPaginationActionsTable(props) {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.entid}>
               <TableCell
                 component="th"
                 scope="row"
                 className={classes.tableCell}
               >
-                {row.name}
+                {row.entid}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
                 <Button
                   className={classes.button}
                   onClick={() => {
-                    onMoreInfo(dispatch, row.id, history);
+                    onMoreInfo(dispatch, row.entid, history);
                   }}
                 >
                   More Info
