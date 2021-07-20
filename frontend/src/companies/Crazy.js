@@ -23,7 +23,6 @@ const chartData = (labels, label, data, type) => {
       type: type[i],
       label: label[i],
       data: data[i],
-      //   fill: false,
       backgroundColor: color[i],
       borderColor: color[i],
     });

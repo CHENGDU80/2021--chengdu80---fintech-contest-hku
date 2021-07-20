@@ -3,7 +3,7 @@ import { Divider, Typography, Paper, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import BasicInfo from "./BasicInfo";
 import LineChart from "./LineChart";
-// import DoughnutChart from "./Doughnut";
+import HorizontalBarChart from "./HorizontalBar";
 import Crazy from "./Crazy";
 import { risk, cluster, selectprofile } from "./companiesSlice";
 import {
@@ -147,84 +147,119 @@ const Dashboard = () => {
           >
             <Grid item xs={12}>
               <Paper className={classes.div}>
-                <LineChart
-                  title="Gross Profit"
-                  labels={Object.keys(profile.gross_profit)}
-                  label={["Gross Profit"]}
-                  data={[Object.values(profile.gross_profit)]}
-                />
+                {profile.gross_profit ? (
+                  <LineChart
+                    title="Gross Profit"
+                    labels={Object.keys(profile.gross_profit)}
+                    label={["Gross Profit"]}
+                    data={[Object.values(profile.gross_profit)]}
+                  />
+                ) : (
+                  <Typography>
+                    Gross Profit is not avaliable for this company
+                  </Typography>
+                )}
               </Paper>
             </Grid>
 
             <Grid item xs={12}>
               <Paper className={classes.div}>
-                <LineChart
-                  title="OPEX (Operating Expenses)"
-                  labels={Object.keys(profile.sales_expense)}
-                  label={["OPEX"]}
-                  data={[Object.values(profile.sales_expense)]}
-                />
+                {profile.sales_expense ? (
+                  <LineChart
+                    title="OPEX (Operating Expenses)"
+                    labels={Object.keys(profile.sales_expense)}
+                    label={["OPEX"]}
+                    data={[Object.values(profile.sales_expense)]}
+                  />
+                ) : (
+                  <Typography>
+                    OPEX (Operating Expenses) is not avaliable for this company
+                  </Typography>
+                )}
               </Paper>
             </Grid>
 
             <Grid item xs={12}>
               <Paper className={classes.div}>
-                <LineChart
-                  title="Net Profit"
-                  labels={Object.keys(profile.retained_profits)}
-                  label={["Net Profit"]}
-                  data={[Object.values(profile.retained_profits)]}
-                />
+                {profile.retained_profits ? (
+                  <LineChart
+                    title="Net Profit"
+                    labels={Object.keys(profile.retained_profits)}
+                    label={["Net Profit"]}
+                    data={[Object.values(profile.retained_profits)]}
+                  />
+                ) : (
+                  <Typography>
+                    Net Profit is not avaliable for this company
+                  </Typography>
+                )}
               </Paper>
             </Grid>
 
             <Grid item xs={12}>
               <Paper className={classes.div}>
-                <Crazy
-                  title="Total Liabilities, Shareholder Equity"
-                  type={["bar", "bar"]}
-                  labels={Object.keys(profile.LIAGRO)}
-                  label={["Total Liabilities", "Shareholder Equity"]}
-                  data={[
-                    Object.values(profile.LIAGRO),
-                    Object.values(profile.TOTEQU),
-                  ]}
-                />
+                {profile.LIAGRO && profile.TOTEQU ? (
+                  <Crazy
+                    title="Total Liabilities, Shareholder Equity"
+                    type={["bar", "bar"]}
+                    labels={Object.keys(profile.LIAGRO)}
+                    label={["Total Liabilities", "Shareholder Equity"]}
+                    data={[
+                      Object.values(profile.LIAGRO),
+                      Object.values(profile.TOTEQU),
+                    ]}
+                  />
+                ) : (
+                  <Typography>
+                    Total Liabilities or Shareholder Equity is not avaliable for
+                    this company
+                  </Typography>
+                )}
               </Paper>
             </Grid>
 
             <Grid item xs={12}>
               <Paper className={classes.div}>
-                <LineChart
-                  title="Debt Equity Ratio"
-                  labels={Object.keys(profile.debtEquityRatio)}
-                  label={["Debt Equity Ratio"]}
-                  data={[Object.values(profile.debtEquityRatio)]}
-                />
+                {profile.debtEquityRatio ? (
+                  <LineChart
+                    title="Debt Equity Ratio"
+                    labels={Object.keys(profile.debtEquityRatio)}
+                    label={["Debt Equity Ratio"]}
+                    data={[Object.values(profile.debtEquityRatio)]}
+                  />
+                ) : (
+                  <Typography>
+                    Debt Equity Ratio is not avaliable for this company
+                  </Typography>
+                )}
               </Paper>
             </Grid>
 
             {/* <Grid item xs={12}>
               <Paper className={classes.div}>
-                <LineChart
-                  title="Return on Equity (ROE)"
-                  labels={Object.keys(profile.returnOnEquity)}
-                  label={["Return on Equity"]}
-                  data={[Object.values(profile.returnOnEquity)]}
+                <HorizontalBarChart
+                  title="Explainable AI"
+                  labels={Object.keys(profile.retained_profits)}
+                  label={["Net Profit"]}
+                  data={[Object.values(profile.retained_profits)]}
                 />
               </Paper>
             </Grid> */}
 
-            {/* <Grid item xs={5}>
+            <Grid item xs={12}>
               <Paper className={classes.div}>
-                <DoughnutChart
-                  title="Doughnut"
-                  labels={["1", "2", "3"]}
-                  label={["# of Votes"]}
-                  data={[12, 19, 3]}
-                />
+                {profile.returnOnEquity ? (
+                  <LineChart
+                    title="Return on Equity (ROE)"
+                    labels={Object.keys(profile.returnOnEquity)}
+                    label={["Return on Equity"]}
+                    data={[Object.values(profile.returnOnEquity)]}
+                  />
+                ) : (
+                  <Typography>ROE is not avaliable for this company</Typography>
+                )}
               </Paper>
-            </Grid> */}
+            </Grid>
           </Grid>
 
           <Grid

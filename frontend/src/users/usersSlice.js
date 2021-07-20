@@ -49,11 +49,11 @@ export const putWatchlist = createAsyncThunk(
 );
 
 export const deleteWatchlist = createAsyncThunk(
-  "/corporation/watch_delete",
+  "/corporation/watch_del",
   async (userInfo, thunkAPI) => {
-    const response = await axios.delete(
-      host + "/corporation/watch_delete",
-      JSON.stringify(userInfo)
+    const response = await axios.post(
+      host + "/corporation/watch_del",
+      userInfo
     );
     return response.data;
   }
