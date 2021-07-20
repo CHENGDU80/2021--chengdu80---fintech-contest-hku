@@ -11,7 +11,6 @@ export const login = createAsyncThunk(
       host + "/auth/login",
       JSON.stringify(userInfo)
     );
-    console.log(response);
     return response.data;
   }
 );
@@ -23,29 +22,30 @@ export const register = createAsyncThunk(
       host + "/auth/register",
       JSON.stringify(userInfo)
     );
-    console.log(response);
     return response.data;
   }
 );
 
 export const getWatchlist = createAsyncThunk(
-  "api/watchlist",
+  "/corporation/watch_list",
   async (userInfo, thunkAPI) => {
-    const response = await axios.get(
-      host + "/api/watchlist",
+    // console.log(userInfo);
+    const response = await axios.post(
+      host + "/corporation/watch_list",
       JSON.stringify(userInfo)
     );
-    console.log(response);
+    // console.log(response);
     return response.data;
   }
 );
 
 export const putWatchlist = createAsyncThunk(
-  "api/watchlist",
+  "/corporation/watch_add",
   async (userInfo, thunkAPI) => {
-    const response = await axios.put(
-      host + "/api/watchlist",
-      JSON.stringify(userInfo)
+    const response = await axios.post(
+      host + "/corporation/watch_add",
+      // JSON.stringify(userInfo)
+      userInfo
     );
     console.log(response);
     return response.data;
@@ -53,13 +53,13 @@ export const putWatchlist = createAsyncThunk(
 );
 
 export const deleteWatchlist = createAsyncThunk(
-  "api/watchlist",
+  "/corporation/watch_delete",
   async (userInfo, thunkAPI) => {
     const response = await axios.delete(
-      host + "/api/watchlist",
+      host + "/corporation/watch_delete",
       JSON.stringify(userInfo)
     );
-    console.log(response);
+    // console.log(response);
     return response.data;
   }
 );
@@ -74,13 +74,17 @@ export const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-      state.user = action.payload;
+      if (action.payload.res !== -1) {
+        state.user = action.meta.arg.username;
+      }
     });
     builder.addCase(register.fulfilled, (state, action) => {
-      state.user = action.payload;
+      if (action.payload.res !== -1) {
+        state.user = action.meta.arg.username;
+      }
     });
     builder.addCase(getWatchlist.fulfilled, (state, action) => {
-      state.watchlist = action.payload;
+      state.watchlist = action.payload.data;
     });
   },
 });

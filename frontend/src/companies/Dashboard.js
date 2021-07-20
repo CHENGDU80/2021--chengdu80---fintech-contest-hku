@@ -27,12 +27,12 @@ const useStyles = makeStyles({
 });
 
 const onRemove = (dispatch, companyId, username) => {
-  dispatch(() => deleteWatchlist({ username, companyId }));
-  dispatch(getWatchlist);
+  dispatch(deleteWatchlist({ username, companyId }));
+  dispatch(getWatchlist({ username }));
 };
 const onAdd = (dispatch, companyId, username) => {
-  dispatch(() => putWatchlist({ username, companyId }));
-  dispatch(() => getWatchlist({ username }));
+  dispatch(putWatchlist({ username, companyId }));
+  // dispatch(getWatchlist({ username }));
 };
 const onRisk = (history) => {
   history.push("/riskanalysis");
@@ -43,7 +43,6 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   let username = useSelector(selectUser);
-  // dispatch(() => getWatchlist({ username }));
   let watchlist = useSelector(selectWatchlist);
   let profile = useSelector(selectprofile);
   // for (const [key, value] of Object.entries(profile)) {
@@ -56,10 +55,10 @@ const Dashboard = () => {
       <div className={classes.div}>
         <Grid container spacing={2}>
           <Grid item xs={8}>
-            <Typography className={classes.heading}>
-              The Coca Cola Company
+            <Typography className={classes.heading}>{profile.entid}</Typography>
+            <Typography className={classes.subheading}>
+              {profile.ENTTYPE}
             </Typography>
-            <Typography className={classes.subheading}>K O</Typography>
           </Grid>
 
           <Grid item xs={4} container justifyContent="flex-end">
@@ -70,7 +69,9 @@ const Dashboard = () => {
                     variant="contained"
                     className={classes.button}
                     color="primary"
-                    onClick={() => onRemove(dispatch, profile.id, username)}
+                    onClick={() =>
+                      onRemove(dispatch, profile.entid.toString(), username)
+                    }
                   >
                     Remove from watchlist
                   </Button>
@@ -79,7 +80,9 @@ const Dashboard = () => {
                     variant="contained"
                     className={classes.button}
                     color="primary"
-                    onClick={() => onAdd(dispatch, profile.id, username)}
+                    onClick={() =>
+                      onAdd(dispatch, profile.entid.toString(), username)
+                    }
                   >
                     Add to watchlist
                   </Button>
@@ -90,7 +93,6 @@ const Dashboard = () => {
                   className={classes.button}
                   color="primary"
                   disabled
-                  onClick={() => onAdd(dispatch, profile.id, username)}
                 >
                   Add to watchlist
                 </Button>

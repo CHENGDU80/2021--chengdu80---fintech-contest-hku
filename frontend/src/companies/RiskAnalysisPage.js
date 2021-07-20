@@ -1,10 +1,9 @@
 import React from "react";
 import { Divider, Typography, Paper, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import News from "./News";
-import LineChart from "./LineChart";
-import DoughnutChart from "./Doughnut";
-import Crazy from "./Crazy";
+// import LineChart from "./LineChart";
+// import DoughnutChart from "./Doughnut";
+// import Crazy from "./Crazy";
 import { selectprofile, selectrisk } from "./companiesSlice";
 import {
   getWatchlist,
@@ -14,6 +13,7 @@ import {
 } from "../users/usersSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import RiskTypeCard from "./RiskTypeCard";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "2rem" },
@@ -89,73 +89,30 @@ const RiskAnalysisPage = () => {
             <Divider />
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            md={8}
-            container
-            spacing={2}
-            alignContent="flex-start"
-          >
-            <Grid item xs={12}>
+          <Grid item xs={12} container spacing={2} alignContent="flex-start">
+            <Grid item xs={3}>
               <Paper className={classes.div}>
-                <LineChart
-                  title="Line Chart"
-                  labels={["1", "2", "3", "4", "5", "6"]}
-                  label={["# of Votes", "# of sth"]}
-                  data={[
-                    [12, 19, 3, 5, 2, 3],
-                    [5, 2, 8, 1, 12, 3],
-                  ]}
-                />
+                <RiskTypeCard title="Risk 1" data="10%" />
               </Paper>
             </Grid>
-
-            <Grid item xs={5}>
+            <Grid item xs={3}>
               <Paper className={classes.div}>
-                <DoughnutChart
-                  title="Doughnut"
-                  labels={["1", "2", "3"]}
-                  label={["# of Votes"]}
-                  data={[12, 19, 3]}
-                />
+                <RiskTypeCard title="Risk 2" data="20%" />
               </Paper>
             </Grid>
-
-            <Grid item xs={7}>
+            <Grid item xs={3}>
               <Paper className={classes.div}>
-                <LineChart
-                  title="Line Chart"
-                  labels={["1", "2", "3", "4", "5", "6"]}
-                  label={["# of Votes"]}
-                  data={[[12, 19, 3, 5, 2, 3]]}
-                />
+                <RiskTypeCard title="Risk 3" data="30%" />
               </Paper>
             </Grid>
-
-            <Grid item xs={12}>
+            <Grid item xs={3}>
               <Paper className={classes.div}>
-                <Crazy
-                  title="Line Bar"
-                  type={["line", "bar"]}
-                  labels={["1", "2", "3", "4", "5", "6"]}
-                  label={["# of Votes", "# of sth"]}
-                  data={[
-                    [12, 19, 3, 5, 2, 3],
-                    [5, 2, 8, 1, 12, 3],
-                  ]}
-                />
+                <RiskTypeCard title="Risk 4" data="40%" />
               </Paper>
             </Grid>
           </Grid>
 
-          <Grid item xs={8} md={4}>
-            <Grid item xs={12}>
-              <Paper>
-                <News />
-              </Paper>
-            </Grid>
-          </Grid>
+          <Grid item xs={8} md={4}></Grid>
         </Grid>
       </div>
     </div>

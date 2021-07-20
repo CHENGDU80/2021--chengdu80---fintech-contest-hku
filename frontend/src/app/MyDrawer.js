@@ -14,7 +14,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Button from "@material-ui/core/Button";
 import Logo from "../img/logo1.png";
 import ListIcon from "@material-ui/icons/List";
-// import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 import HomePage from "../companies/HomePage";
 import Dashboard from "../companies/Dashboard";
@@ -131,11 +130,6 @@ export default function MyDrawer(props) {
                 <ListIcon style={{ fontSize: 40 }} />
               </ListItemIcon>
             </ListItem>
-            {/* <ListItem button key="Logout" component={Link} to="/logout">
-              <ListItemIcon>
-                <AccountBoxIcon style={{ fontSize: 40 }} />
-              </ListItemIcon>
-            </ListItem> */}
             <Divider />
           </List>
         </div>
