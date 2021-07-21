@@ -277,6 +277,18 @@ def prob(str1):
         list1[i] = float(list1[i])
     return list1
 
+def lime(str1):
+    str1 = str1.replace('[', '')
+    str1 = str1.replace(']', '')
+    str1 = str1.replace('(', '')
+    str1 = str1.replace(')', '')
+    str1 = str1.replace('\'', '')
+    list1 = str1.split(',')
+    dict1 = dict()
+    for i in range(0,len(list1), 2):
+        dict1[list1[i]] = float(list1[i+1])
+    return  dict1
+
 @bp.route("/risk", methods=("GET", "POST"))
 def risk():
     error = None
@@ -284,7 +296,7 @@ def risk():
         data = request.get_data()
         j_data = json.loads(data)
         entid = j_data["id"]
-        result = []
+        result = dict()
         db = get_db()
         if not entid:
             error = "Entid is required."
@@ -296,7 +308,7 @@ def risk():
                 error = "Entid is not exist"
         result = dict(risk_item) 
         result['Probability'] = prob(result['Probability'])
-
+        result['lime'] = lime(result['lime'])
         
         if error is None:
             return jsonify(
