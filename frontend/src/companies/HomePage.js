@@ -65,6 +65,7 @@ const HomePage = () => {
               Please enter a valid company id
             </Typography>
           )}
+          <Typography>Sample ID: 933133385, 535352782, 705310922...</Typography>
         </Grid>
       </Grid>
     </div>
