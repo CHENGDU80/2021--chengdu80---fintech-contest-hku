@@ -110,10 +110,10 @@ def init_db():
     with current_app.open_resource("schema.sql") as f:
         db.executescript(f.read().decode("utf8"))
 
-    csvToDb("total.csv", "corporation")
-    csvToDb("tax_year.csv", "tax_year")
-    csvToDb("company_ar_assetsinfo.csv", "company_ar_assetsinfo")
-    csvToDb("cluster_output.csv", "cluster_output")
+    csvToDb("data/total.csv", "corporation")
+    csvToDb("data/tax_year.csv", "tax_year")
+    csvToDb("data/company_ar_assetsinfo.csv", "company_ar_assetsinfo")
+    csvToDb("data/cluster_output.csv", "cluster_output")
 
 
 @click.command("init-db")
