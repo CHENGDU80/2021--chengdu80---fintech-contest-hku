@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS tax_year;
 DROP TABLE IF EXISTS company_ar_assetsinfo;
 DROP TABLE IF EXISTS userwatch;
 DROP TABLE IF EXISTS cluster_output;
+DROP TABLE IF EXISTS final_label_prob_and_explain;
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -114,6 +114,7 @@ def init_db():
     csvToDb("data/tax_year.csv", "tax_year")
     csvToDb("data/company_ar_assetsinfo.csv", "company_ar_assetsinfo")
     csvToDb("data/cluster_output.csv", "cluster_output")
+    csvToDb("data/final_label_prob_and_explain.csv", "final_label_prob_and_explain")
 
 
 @click.command("init-db")

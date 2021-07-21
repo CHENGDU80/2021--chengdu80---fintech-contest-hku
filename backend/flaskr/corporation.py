@@ -269,3 +269,42 @@ def cluster():
                     res= -1,
                     msg= error,
                 )
+def prob(str1):
+    str1 = str1.replace('[','')
+    str1 = str1.replace(']','')
+    list1 = str1.split()
+    for i in range(len(list1)):
+        list1[i] = float(list1[i])
+    return list1
+
+@bp.route("/risk", methods=("GET", "POST"))
+def risk():
+    error = None
+    if request.method == "POST":
+        data = request.get_data()
+        j_data = json.loads(data)
+        entid = j_data["id"]
+        result = []
+        db = get_db()
+        if not entid:
+            error = "Entid is required."
+        risk_item = db.execute(
+                "SELECT * FROM final_label_prob_and_explain WHERE entid = ?", (entid,)
+        ).fetchone()
+
+        if risk_item is None:
+                error = "Entid is not exist"
+        result = dict(risk_item) 
+        result['Probability'] = prob(result['Probability'])
+
+        
+        if error is None:
+            return jsonify(
+                        res= 0,
+                        data=result,
+                    )
+
+    return jsonify(
+                    res= -1,
+                    msg= error,
+                )
