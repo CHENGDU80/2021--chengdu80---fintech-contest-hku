@@ -45,6 +45,7 @@ const RiskAnalysisPage = () => {
     3: "Other Risk",
     4: "No Risk",
   };
+  console.log(risk);
 
   useEffect(() => {
     if (watchlist === null) {
@@ -201,18 +202,18 @@ const RiskAnalysisPage = () => {
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            {/* <Paper className={classes.div}>
+            <Paper className={classes.div}>
               {Object.keys(risk).length !== 0 ? (
                 <HorizontalBarChart
                   title="Explainable AI"
-                  labels={Object.keys(risk.lime.label)}
-                  label={["Contribution"]}
-                  data={[Object.values(risk.lime.data)]}
+                  labels={[Object.keys(risk.lime)]}
+                  label={["Value"]}
+                  data={[Object.values(risk.lime)]}
                 />
               ) : (
                 <Typography>Data Not Avaliable</Typography>
               )}
-            </Paper> */}
+            </Paper>
           </Grid>
           <Grid item xs={12}>
             <div>
