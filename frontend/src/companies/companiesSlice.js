@@ -16,9 +16,7 @@ export const search = createAsyncThunk(
 export const risk = createAsyncThunk(
   "corporation/risk",
   async (id, thunkAPI) => {
-    console.log(id);
     const response = await axios.post(host + "/corporation/risk", id);
-    console.log(response);
     return response.data;
   }
 );
