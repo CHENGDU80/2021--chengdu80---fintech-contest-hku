@@ -7,7 +7,7 @@
 
 ## Usage
 
-- `cd backend/examples/tutorial`
+- `cd backend`
 - `pip install -e ../..`
 - `pip install -e .`
 - `pip3 install -U flask-cors`
@@ -23,3 +23,6 @@
 - `cd frontend`
 - `npm i`
 - `npm start`
+
+## Documentation
+Refer to [here](https://fintechendeavour.gitbook.io/aspect/) for more details!
