@@ -7,7 +7,6 @@ from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required
 from flaskr.db import get_db
 
 bp = Blueprint("blog", __name__)
@@ -58,7 +57,6 @@ def get_post(id, check_author=True):
 
 
 @bp.route("/create", methods=("GET", "POST"))
-@login_required
 def create():
     """Create a new post for the current user."""
     if request.method == "POST":
@@ -84,7 +82,6 @@ def create():
 
 
 @bp.route("/<int:id>/update", methods=("GET", "POST"))
-@login_required
 def update(id):
     """Update a post if the current user is the author."""
     post = get_post(id)
@@ -111,7 +108,6 @@ def update(id):
 
 
 @bp.route("/<int:id>/delete", methods=("POST",))
-@login_required
 def delete(id):
     """Delete a post.
 
