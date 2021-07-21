@@ -155,7 +155,7 @@ const RiskAnalysisPage = () => {
               <Paper className={classes.div}>
                 {Object.keys(risk).length !== 0 ? (
                   <RiskTypeCard
-                    title="Operation Risk"
+                    title={risks[0]}
                     data={(risk.prob[0] * 100).toString() + "%"}
                   />
                 ) : (
@@ -167,7 +167,7 @@ const RiskAnalysisPage = () => {
               <Paper className={classes.div}>
                 {Object.keys(risk).length !== 0 ? (
                   <RiskTypeCard
-                    title="Operation Risk"
+                    title={risks[1]}
                     data={(risk.prob[1] * 100).toString() + "%"}
                   />
                 ) : (
@@ -179,7 +179,7 @@ const RiskAnalysisPage = () => {
               <Paper className={classes.div}>
                 {Object.keys(risk).length !== 0 ? (
                   <RiskTypeCard
-                    title="Operation Risk"
+                    title={risks[2]}
                     data={(risk.prob[2] * 100).toString() + "%"}
                   />
                 ) : (
@@ -191,7 +191,7 @@ const RiskAnalysisPage = () => {
               <Paper className={classes.div}>
                 {Object.keys(risk).length !== 0 ? (
                   <RiskTypeCard
-                    title="Operation Risk"
+                    title={risks[3]}
                     data={(risk.prob[3] * 100).toString() + "%"}
                   />
                 ) : (

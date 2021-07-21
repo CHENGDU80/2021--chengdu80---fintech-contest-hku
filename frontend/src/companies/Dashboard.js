@@ -62,7 +62,7 @@ const Dashboard = () => {
       });
   };
   const onRisk = (dispatch, companyId, history) => {
-    dispatch(risk({ companyId }));
+    dispatch(risk({ id: companyId }));
     dispatch(cluster({ id: companyId }));
     history.push("/riskanalysis");
   };

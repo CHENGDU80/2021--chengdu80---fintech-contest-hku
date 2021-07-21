@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const host = "http://18.163.133.53:5000";
+// const host = "http://18.163.133.53:5000";
+const host = "http://127.0.0.1:5000";
 const initialState = { profile: {}, risk: {}, cluster: {} };
 
 export const search = createAsyncThunk(
@@ -15,7 +16,9 @@ export const search = createAsyncThunk(
 export const risk = createAsyncThunk(
   "corporation/risk",
   async (id, thunkAPI) => {
+    console.log(id);
     const response = await axios.post(host + "/corporation/risk", id);
+    console.log(response);
     return response.data;
   }
 );
