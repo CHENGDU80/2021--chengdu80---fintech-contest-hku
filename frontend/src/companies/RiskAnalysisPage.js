@@ -84,7 +84,7 @@ const RiskAnalysisPage = () => {
     history.push("/dashboard");
   };
 
-  if (!profile) {
+  if (!profile || !risk) {
     return <div />;
   }
 
@@ -95,10 +95,9 @@ const RiskAnalysisPage = () => {
           <Grid item xs={8}>
             <Typography className={classes.heading}>{profile.entid}</Typography>
             <Typography className={classes.heading}>
-              {"Risk Type: " + risks[profile.ENTTYPE]}
+              {"Risk Type: " + risks[risk.label]}
             </Typography>
           </Grid>
-
           <Grid item xs={4} container justifyContent="flex-end">
             <Grid item xs={7}>
               {username ? (
@@ -148,45 +147,73 @@ const RiskAnalysisPage = () => {
               </Button>
             </Grid>
           </Grid>
-
           <Grid item xs={12}>
             <Divider />
           </Grid>
-
           <Grid item xs={12} container spacing={2} alignContent="flex-start">
             <Grid item xs={3}>
               <Paper className={classes.div}>
-                <RiskTypeCard title="Operation Risk" data="10%" />
+                {Object.keys(risk).length !== 0 ? (
+                  <RiskTypeCard
+                    title="Operation Risk"
+                    data={(risk.prob[0] * 100).toString() + "%"}
+                  />
+                ) : (
+                  <Typography>Data Not Avaliable</Typography>
+                )}
               </Paper>
             </Grid>
             <Grid item xs={3}>
               <Paper className={classes.div}>
-                <RiskTypeCard title="Legal Risk" data="20%" />
+                {Object.keys(risk).length !== 0 ? (
+                  <RiskTypeCard
+                    title="Operation Risk"
+                    data={(risk.prob[1] * 100).toString() + "%"}
+                  />
+                ) : (
+                  <Typography>Data Not Avaliable</Typography>
+                )}
               </Paper>
             </Grid>
             <Grid item xs={3}>
               <Paper className={classes.div}>
-                <RiskTypeCard title="Loan Risk" data="30%" />
+                {Object.keys(risk).length !== 0 ? (
+                  <RiskTypeCard
+                    title="Operation Risk"
+                    data={(risk.prob[2] * 100).toString() + "%"}
+                  />
+                ) : (
+                  <Typography>Data Not Avaliable</Typography>
+                )}
               </Paper>
             </Grid>
             <Grid item xs={3}>
               <Paper className={classes.div}>
-                <RiskTypeCard title="Other Risk" data="40%" />
+                {Object.keys(risk).length !== 0 ? (
+                  <RiskTypeCard
+                    title="Operation Risk"
+                    data={(risk.prob[3] * 100).toString() + "%"}
+                  />
+                ) : (
+                  <Typography>Data Not Avaliable</Typography>
+                )}
               </Paper>
             </Grid>
           </Grid>
-
           <Grid item xs={12}>
             <Paper className={classes.div}>
-              <HorizontalBarChart
-                title="Explainable AI"
-                labels={Object.keys(profile.retained_profits)}
-                label={["Contribution"]}
-                data={[Object.values(profile.retained_profits)]}
-              />
+              {Object.keys(risk).length !== 0 ? (
+                <HorizontalBarChart
+                  title="Explainable AI"
+                  labels={Object.keys(risk.lime.label)}
+                  label={["Contribution"]}
+                  data={[Object.values(risk.lime.data)]}
+                />
+              ) : (
+                <Typography>Data Not Avaliable</Typography>
+              )}
             </Paper>
           </Grid>
-
           <Grid item xs={12}>
             <div>
               <Paper>

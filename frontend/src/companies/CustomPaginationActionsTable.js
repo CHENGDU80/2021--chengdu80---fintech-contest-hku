@@ -17,6 +17,7 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import { useDispatch } from "react-redux";
 import { search } from "./companiesSlice";
 import { useHistory } from "react-router-dom";
+import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
@@ -141,12 +142,24 @@ export default function CustomPaginationActionsTable(props) {
           ).map((row) => (
             <TableRow key={row.entid}>
               <TableCell
+                style={{ width: 50 }}
+                align="right"
+                component="th"
+                scope="row"
+                className={classes.tableCell}
+              >
+                <NotificationsActiveIcon />
+              </TableCell>
+
+              <TableCell
+                align="left"
                 component="th"
                 scope="row"
                 className={classes.tableCell}
               >
                 {row.entid}
               </TableCell>
+
               <TableCell style={{ width: 160 }} align="right">
                 <Button
                   className={classes.button}
