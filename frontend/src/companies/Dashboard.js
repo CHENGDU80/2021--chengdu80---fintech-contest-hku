@@ -3,7 +3,6 @@ import { Divider, Typography, Paper, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import BasicInfo from "./BasicInfo";
 import LineChart from "./LineChart";
-import HorizontalBarChart from "./HorizontalBar";
 import Crazy from "./Crazy";
 import { risk, cluster, selectprofile } from "./companiesSlice";
 import {
@@ -234,17 +233,6 @@ const Dashboard = () => {
                 )}
               </Paper>
             </Grid>
-
-            {/* <Grid item xs={12}>
-              <Paper className={classes.div}>
-                <HorizontalBarChart
-                  title="Explainable AI"
-                  labels={Object.keys(profile.retained_profits)}
-                  label={["Net Profit"]}
-                  data={[Object.values(profile.retained_profits)]}
-                />
-              </Paper>
-            </Grid> */}
 
             <Grid item xs={12}>
               <Paper className={classes.div}>

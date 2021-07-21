@@ -23,11 +23,7 @@ export const risk = createAsyncThunk(
 export const cluster = createAsyncThunk(
   "/corporation/cluster",
   async (id, thunkAPI) => {
-    const response = await axios.post(
-      host + "/corporation/cluster",
-      // id
-      { id: "535352782" }
-    );
+    const response = await axios.post(host + "/corporation/cluster", id);
     return response.data;
   }
 );

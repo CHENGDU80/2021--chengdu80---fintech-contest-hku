@@ -95,7 +95,7 @@ const RiskAnalysisPage = () => {
           <Grid item xs={8}>
             <Typography className={classes.heading}>{profile.entid}</Typography>
             <Typography className={classes.heading}>
-              {"Risk Type:" + risks[profile.ENTTYPE]}
+              {"Risk Type: " + risks[profile.ENTTYPE]}
             </Typography>
           </Grid>
 
