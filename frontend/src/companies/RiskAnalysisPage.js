@@ -20,6 +20,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import RiskTypeCard from "./RiskTypeCard";
 import CustomPaginationActionsTable from "./CustomPaginationActionsTable";
+import HorizontalBarChart from "./HorizontalBar";
 
 const useStyles = makeStyles({
   div: { width: "100%", boxSizing: "border-box", padding: "2rem" },
@@ -37,6 +38,13 @@ const RiskAnalysisPage = () => {
   let profile = useSelector(selectprofile);
   let risk = useSelector(selectrisk);
   let cluster = useSelector(selectCluster);
+  const risks = {
+    0: "Operation Risk",
+    1: "Legal Risk",
+    2: "Loan Risk",
+    3: "Other Risk",
+    4: "No Risk",
+  };
 
   useEffect(() => {
     if (watchlist === null) {
@@ -86,8 +94,8 @@ const RiskAnalysisPage = () => {
         <Grid container spacing={2}>
           <Grid item xs={8}>
             <Typography className={classes.heading}>{profile.entid}</Typography>
-            <Typography className={classes.subheading}>
-              {profile.ENTTYPE}
+            <Typography className={classes.heading}>
+              {"Risk Type:" + risks[profile.ENTTYPE]}
             </Typography>
           </Grid>
 
@@ -148,24 +156,35 @@ const RiskAnalysisPage = () => {
           <Grid item xs={12} container spacing={2} alignContent="flex-start">
             <Grid item xs={3}>
               <Paper className={classes.div}>
-                <RiskTypeCard title="Risk 1" data="10%" />
+                <RiskTypeCard title="Operation Risk" data="10%" />
               </Paper>
             </Grid>
             <Grid item xs={3}>
               <Paper className={classes.div}>
-                <RiskTypeCard title="Risk 2" data="20%" />
+                <RiskTypeCard title="Legal Risk" data="20%" />
               </Paper>
             </Grid>
             <Grid item xs={3}>
               <Paper className={classes.div}>
-                <RiskTypeCard title="Risk 3" data="30%" />
+                <RiskTypeCard title="Loan Risk" data="30%" />
               </Paper>
             </Grid>
             <Grid item xs={3}>
               <Paper className={classes.div}>
-                <RiskTypeCard title="Risk 4" data="40%" />
+                <RiskTypeCard title="Other Risk" data="40%" />
               </Paper>
             </Grid>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Paper className={classes.div}>
+              <HorizontalBarChart
+                title="Explainable AI"
+                labels={Object.keys(profile.retained_profits)}
+                label={["Contribution"]}
+                data={[Object.values(profile.retained_profits)]}
+              />
+            </Paper>
           </Grid>
 
           <Grid item xs={12}>

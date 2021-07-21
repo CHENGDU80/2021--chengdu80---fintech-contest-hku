@@ -12,14 +12,13 @@ export const search = createAsyncThunk(
   }
 );
 
-export const risk = createAsyncThunk("companies/risk", async (id, thunkAPI) => {
-  // const response = await axios.post(
-  //   host + "/corporation/risk",
-  //   JSON.stringify(id)
-  // );
-  // console.log(response);
-  // return response.data;
-});
+export const risk = createAsyncThunk(
+  "corporation/risk",
+  async (id, thunkAPI) => {
+    const response = await axios.post(host + "/corporation/risk", id);
+    return response.data;
+  }
+);
 
 export const cluster = createAsyncThunk(
   "/corporation/cluster",
@@ -41,9 +40,9 @@ export const companiesSlice = createSlice({
     builder.addCase(search.fulfilled, (state, action) => {
       state.profile = action.payload.data;
     });
-    // builder.addCase(risk.fulfilled, (state, action) => {
-    //   state.risk = action.payload.data;
-    // });
+    builder.addCase(risk.fulfilled, (state, action) => {
+      state.risk = action.payload.data;
+    });
     builder.addCase(cluster.fulfilled, (state, action) => {
       state.cluster = action.payload.data;
     });

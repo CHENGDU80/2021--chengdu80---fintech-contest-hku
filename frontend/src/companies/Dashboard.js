@@ -78,7 +78,7 @@ const Dashboard = () => {
           <Grid item xs={8}>
             <Typography className={classes.heading}>{profile.entid}</Typography>
             <Typography className={classes.subheading}>
-              {profile.ENTTYPE}
+              {"Type of Enterprise:" + profile.ENTTYPE}
             </Typography>
           </Grid>
 
